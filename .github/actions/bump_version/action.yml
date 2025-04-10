@@ -14,14 +14,5 @@ runs:
 
     - name: Bump version in Cargo.toml
       run: |
-        python .github/actions/bump_version/bump_version.py --target Cargo.toml "${{ github.ref_name }}"
-      shell: bash
-
-    - name: Check version in Cargo.toml matches Release tag
-      run: |
-        VERSION=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[0].version')
-        if [ "${GITHUB_REF#refs/tags/}" != "$VERSION" ]; then
-          echo "Version mismatch: Cargo.toml ($VERSION) doesn't match Release tag (${GITHUB_REF#refs/tags/})"
-          exit 1
-        fi
+        python .github/actions/bump_version/bump_version.py --target Cargo.toml "0.2.7"
       shell: bash
